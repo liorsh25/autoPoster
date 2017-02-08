@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>
+				%date{ISO8601} %-5level [%thread]- %C{30}::%M\(%F:%L\)  %msg %n
+			</Pattern>
+		</layout>
+	</appender>
+	
+	 <appender name="LOG_FILE_APP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>./logs/posterApp.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Replace file every day -->
+            <fileNamePattern>./logs/posterApp.log.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 50MB -->
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 10 days' worth of history -->
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <pattern>%date{ISO8601} %-5level [%thread]- %C{30}::%M\(%F:%L\)  %msg %n</pattern>
+        </encoder>
+    </appender>
+	
+	
+	 <appender name="LOG_FILE_COLLECTOR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>./logs/collector.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Replace file every day -->
+            <fileNamePattern>./logs/collector.log.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 50MB -->
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 10 days' worth of history -->
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <pattern>%date{ISO8601} %-5level [%thread]- %C{30}::%M\(%F:%L\)  %msg %n</pattern>
+        </encoder>
+    </appender>
+	
+     <appender name="LOG_FILE_PUBLISHER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>./logs/publisher.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Replace file every day -->
+            <fileNamePattern>./logs/publisher.log.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 50MB -->
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 10 days' worth of history -->
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <pattern>%date{ISO8601} %-5level [%thread]- %C{30}::%M\(%F:%L\)  %msg %n</pattern>
+        </encoder>
+    </appender>
+   
+
+		
+	<logger name="com.monlinks.dealsposter" level="debug"
+		additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="LOG_FILE_APP" />
+	</logger>
+	
+	<logger name="com.monlinks.dealsposter.dealscollectorservice" level="debug"
+		additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="LOG_FILE_COLLECTOR" />
+	</logger>
+	
+	<logger name="com.monlinks.dealsposter.dealsposterservice" level="debug"
+		additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="LOG_FILE_PUBLISHER" />
+	</logger>
+	
+	
+	<root level="error">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="LOG_FILE_APP" />
+	</root>
+
+</configuration>
